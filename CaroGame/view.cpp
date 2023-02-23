@@ -24,12 +24,6 @@ void ShowScrollbar(bool Show) {
 	ShowScrollBar(hWnd, SB_BOTH, Show);
 }
 
-//Disable selection in the console window
-void DisableSelection() {
-	HANDLE hStdin = GetStdHandle(STD_INPUT_HANDLE);
-	SetConsoleMode(hStdin, ~ENABLE_QUICK_EDIT_MODE);
-}
-
 //Set font size & font
 void SetFont(const wchar_t name[], int size) {
 	CONSOLE_FONT_INFOEX cfi;
@@ -49,7 +43,6 @@ void CreateConsoleWindow(int width, int height) {
 	SetConsoleTitle(L"Caro Game");
 	SetWindowSize(width, height);
 	ShowScrollbar(0);
-	DisableSelection();
 	FixConsoleWindow();
 }
 
@@ -59,6 +52,15 @@ void GotoXY(int x, int y) {
 	coord.X = x;
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+//Show/Hide Cursor on the console window
+void ShowCur(bool CursorVisibility) {
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO ConCurInf;
+	ConCurInf.dwSize = 10;
+	ConCurInf.bVisible = CursorVisibility;
+	SetConsoleCursorInfo(handle, &ConCurInf);
 }
 
 //Draw the Caro board
@@ -113,4 +115,5 @@ void DrawBoard(int pSize) {
 			}
 		}
 	}
+	GotoXY(FIRST_CELL_X, FIRST_CELL_Y); //Move pointer to the first cell
 }

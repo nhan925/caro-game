@@ -5,7 +5,9 @@
 
 int main() {
 	CreateConsoleWindow(WIDTH, HEIGHT);
+	ShowCur(0);
 	DrawBoard(BOARD_SIZE);
-	cin.get();
+	ShowCur(1);
+	HandleEvent(4, 2, HandleKeyForBoard);
 	return 0;
 }

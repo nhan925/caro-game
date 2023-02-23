@@ -13,8 +13,10 @@ using std::string;
 
 //Game Data
 #define BOARD_SIZE 15
-#define LEFT 3 
-#define TOP 1 
+#define LEFT 5 
+#define TOP 5 
+#define FIRST_CELL_X LEFT + 2
+#define FIRST_CELL_Y TOP + 1
 
 //Console size
 #define HEIGHT 720
@@ -54,4 +56,4 @@ struct _POINT {
 static _POINT _A[BOARD_SIZE][BOARD_SIZE];
 static bool _TURN;
 static int _COMMAND;
-static int _X, _Y;
+static int _X = FIRST_CELL_X, _Y = FIRST_CELL_Y;
