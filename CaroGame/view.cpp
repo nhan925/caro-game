@@ -85,7 +85,7 @@ void DrawBoard(int pSize) {
 		GotoXY(LEFT + Max_j, TOP + Max_i - i);
 		cout << VERTICAL_LINE;
 
-		Sleep(50);
+		Sleep(20);
 	}
 	//Draw board
 	for (int i = 0; i <= Max_i; i++) {
@@ -116,4 +116,76 @@ void DrawBoard(int pSize) {
 		}
 	}
 	GotoXY(FIRST_CELL_X, FIRST_CELL_Y); //Move pointer to the first cell
+}
+
+//Loading effect when run the game
+void LoadingEffect() {
+	ShowCur(0);
+	GotoXY(45, 19);
+	printf("Loading...");
+	GotoXY(45, 20);
+	for (int i = 0; i <= 80; i++) {
+		cout << char(219);
+		Sleep(15);
+	}
+	//Clear screen
+	GotoXY(45, 19);
+	printf("          ");
+	GotoXY(45, 20);
+	for (int i = 0; i <= 80; i++)
+		printf(" ");
+}
+
+//Draw main menu
+void MainMenu() {
+	ShowCur(0);
+	int x = 43, y = 7;
+	GotoXY(x, y);
+	printf("______________/\\\\\\\\\\\\\\\\\\__________________________________________________ 								\n");
+	GotoXY(x, ++y);
+	printf(" ___________/\\\\\\////////___________________________________________________ 										\n");
+	GotoXY(x, ++y);
+	printf("  _________/\\\\\\/____________________________________________________________ 									\n");
+	GotoXY(x, ++y);
+	printf("   ________/\\\\\\______________/\\\\\\\\\\\\\\\\\\_____/\\\\/\\\\\\\\\\\\\\______/\\\\\\\\\\__________ 			\n");
+	GotoXY(x, ++y);
+	printf("    _______\\/\\\\\\_____________\\////////\\\\\\___\\/\\\\\\/////\\\\\\___/\\\\\\///\\\\\\________  				\n");
+	GotoXY(x, ++y);
+	printf("     _______\\//\\\\\\______________/\\\\\\\\\\\\\\\\\\\\__\\/\\\\\\___\\///___/\\\\\\__\\//\\\\\\_______ 			\n");
+	GotoXY(x, ++y);
+	printf("      ________\\///\\\\\\___________/\\\\\\/////\\\\\\__\\/\\\\\\_________\\//\\\\\\__/\\\\\\________  				\n");
+	GotoXY(x, ++y);
+	printf("       __________\\////\\\\\\\\\\\\\\\\\\_\\//\\\\\\\\\\\\\\\\/\\\\_\\/\\\\\\__________\\///\\\\\\\\\\/_________ 	\n");
+	GotoXY(x, ++y);
+	printf("        _____________\\/////////___\\////////\\//__\\///_____________\\/////___________								\n");
+
+	x = 83; y = 22; 
+	GotoXY(x, y);
+	printf("New Game");
+
+	y += 2;
+	GotoXY(x, y);
+	printf("Continue");
+
+	y += 2;
+	GotoXY(x, y);
+	printf("Settings");
+
+	y += 2;
+	x += 2;
+	GotoXY(x, y);
+	printf("Help");
+
+	y += 2;
+	GotoXY(x, y);
+	printf("Info");
+
+	y += 2;
+	GotoXY(x, y);
+	printf("Exit");
+
+	GotoXY(80, 22);
+	cout << SELECTED_LEFT;
+	GotoXY(93, 22);
+	cout << SELECTED_RIGHT;
 }

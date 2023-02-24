@@ -54,8 +54,53 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 			else {
 				GotoXY(_X, _Y - y);
 				_Y -= y;
-				break;
 			}
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+//Handle key for the main menu
+void HandleKeyForMainMenu(int X, int Y, KEY_EVENT_RECORD key) {
+	static int x = X, y = Y;
+	if (key.bKeyDown) //Key pressed
+	{
+		switch (key.wVirtualKeyCode)
+		{
+		case VK_RETURN: //Enter
+			break;
+		case VK_DOWN: case 0x53: {//Down arrow
+			GotoXY(x, y);
+			printf(" ");
+			GotoXY(x + 13, y);
+			printf(" ");
+			if (y == Y + 10)
+				y = Y;
+			else
+				y += 2;
+			GotoXY(x, y);
+			cout << SELECTED_LEFT;
+			GotoXY(x + 13, y);
+			cout << SELECTED_RIGHT;
+			break; 
+		}
+		case VK_UP: case 0x57: {//Up arrow
+			GotoXY(x, y);
+			printf(" ");
+			GotoXY(x + 13, y);
+			printf(" ");
+			if (y == Y)
+				y = Y + 10;
+			else
+				y -= 2;
+			GotoXY(x, y);
+			cout << SELECTED_LEFT;
+			GotoXY(x + 13, y);
+			cout << SELECTED_RIGHT;
+			break;
+		}
 		default:
 			break;
 		}

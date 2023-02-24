@@ -48,6 +48,10 @@ using std::string;
 #define T_SHAPE_LEFT char(185)
 #define CROSS char(206)
 
+//ASCII Code For Selected Part Of The Menu
+#define SELECTED_LEFT char(175)
+#define SELECTED_RIGHT char(174)
+
 struct _POINT { 
 	int x, y, c; 
 };
