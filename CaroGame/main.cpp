@@ -9,12 +9,12 @@ int main() {
 	//DrawBoard(BOARD_SIZE);
 	//ShowCur(1);
 	//HandleEvent(4, 2, HandleKeyForBoard);
-	LoadingEffect();
+	//LoadingEffect();
 	MainMenu();
-	HandleEvent(80, 22, HandleKeyForMainMenu);
-	//Sleep(1000);
-	//system("cls");
-	//DrawBoard(BOARD_SIZE);
+	ControlMenu();
+	//Help();
 	//cin.get();
+	
+
 	return 0;
 }

@@ -5,11 +5,15 @@
 #include <windows.h>
 #include <fstream>
 #include <string>
+#include <io.h>
+#include <fcntl.h>
 
 //Namespace
 using std::cout;
 using std::cin;
 using std::string;
+using std::wcout;
+using std::wstring;
 
 //Game Data
 #define BOARD_SIZE 15
@@ -52,6 +56,28 @@ using std::string;
 #define SELECTED_LEFT char(175)
 #define SELECTED_RIGHT char(174)
 
+// ASCII Code For Box
+#define Horizontal_Line char(219)
+#define Upper_Vertical char(223)
+#define Lower_Vertical char(220)
+
+// Menu's Box Data
+#define BMax_i 85
+#define BMax_j 35
+#define BLeft 44
+#define BTop 19
+
+// Help Data
+#define HLeft 43
+#define HTop 5
+#define HMax_i 82
+#define HMax_j 36
+#define OrginalSize 16
+#define Left_Arrow char(17)
+#define Right_Arrow char(16)
+#define Up_Arrow char(30)
+#define Down_Arrow char(31)
+
 struct _POINT { 
 	int x, y, c; 
 };
@@ -61,3 +87,12 @@ static _POINT _A[BOARD_SIZE][BOARD_SIZE];
 static bool _TURN;
 static int _COMMAND;
 static int _X = FIRST_CELL_X, _Y = FIRST_CELL_Y;
+
+//Menu Control
+static bool _KEYPRESSED = 0;
+static int _MENU = 1;
+static int _CURRENT_MENU = 0;
+
+//Main Menu
+static int DEFAULT_X = 80;
+static int  DEFAULT_Y = 22;

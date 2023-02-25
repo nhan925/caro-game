@@ -11,3 +11,8 @@ void SetFont(const wchar_t name[], int size);
 void ShowCur(bool CursorVisibility);
 void MainMenu();
 void LoadingEffect();
+void Help();
+void DrawArrow();
+void DrawKey();
+void DrawEnter();
+void Bye();
