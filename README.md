@@ -1,1 +1,1 @@
-# caro-game
+# Caro Chess
