@@ -5,14 +5,19 @@
 
 int main() {
 	CreateConsoleWindow(WIDTH, HEIGHT);
-	//ShowCur(0);
 	//DrawBoard(BOARD_SIZE);
-	//ShowCur(1);
-	//HandleEvent(4, 2, HandleKeyForBoard);
-	//LoadingEffect();
+	//while (1) {
+	//	HandleEvent(4, 2, HandleKeyForBoard);
+	//}
+	LoadingEffect();
+	
+	
+	PlaySound(TEXT("Sounds//silent.wav"), NULL, SND_FILENAME | SND_ASYNC);  //Fix sound delay
+	
+	PlayBackgroundMusic();
+	
 	MainMenu();
 	ControlMenu();
-	//Help();
 	//cin.get();
 	
 

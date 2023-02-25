@@ -15,10 +15,12 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 		switch (key.wVirtualKeyCode)
 		{
 		case VK_RETURN: //Enter
+			PlaySound(TEXT("Sounds//put-x-o.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			break;
 		case VK_ESCAPE: //Esc
 			break;
 		case VK_LEFT: case 0x41: //Left arrow
+			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_X == FIRST_CELL_X) {
 				_X += (BOARD_SIZE - 1) * x;
 				GotoXY(_X, _Y);
@@ -29,6 +31,7 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 			}
 			break;
 		case VK_RIGHT: case 0x44: //Right arrow
+			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_X == FIRST_CELL_X + (BOARD_SIZE - 1) * x) {
 				_X = FIRST_CELL_X;
 				GotoXY(_X, _Y);
@@ -39,6 +42,7 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 			}
 			break;
 		case VK_DOWN: case 0x53: //Down arrow
+			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_Y == FIRST_CELL_Y + (BOARD_SIZE - 1) * y) {
 				_Y = FIRST_CELL_Y;
 				GotoXY(_X, _Y);
@@ -49,6 +53,7 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 			}
 			break;
 		case VK_UP: case 0x57: //Up arrow
+			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_Y == FIRST_CELL_Y) {
 				_Y += (BOARD_SIZE - 1) * y;
 				GotoXY(_X, _Y);
@@ -71,10 +76,12 @@ void HandleKeyForMainMenu(int X, int Y, KEY_EVENT_RECORD key) {
 		switch (key.wVirtualKeyCode)
 		{
 		case VK_RETURN: {//Enter
+			PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			_KEYPRESSED = 1;
 			break; 
 		}
 		case VK_DOWN: case 0x53: {//Down arrow
+			PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			GotoXY(DEFAULT_X, DEFAULT_Y);
 			printf(" ");
 			GotoXY(DEFAULT_X + 13, DEFAULT_Y);
@@ -94,6 +101,7 @@ void HandleKeyForMainMenu(int X, int Y, KEY_EVENT_RECORD key) {
 			break; 
 		}
 		case VK_UP: case 0x57: {//Up arrow
+			PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			GotoXY(DEFAULT_X, DEFAULT_Y);
 			printf(" ");
 			GotoXY(DEFAULT_X + 13, DEFAULT_Y);
@@ -121,6 +129,7 @@ void HandleKeyForMainMenu(int X, int Y, KEY_EVENT_RECORD key) {
 //Handle key for the Help Menu
 void HandleKeyForHelp(int X, int Y, KEY_EVENT_RECORD key) {
 	if (key.bKeyDown && key.wVirtualKeyCode == VK_RETURN) {
+		PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		_MENU = 1;
 		_CURRENT_MENU = 0;
 		system("cls");
@@ -200,4 +209,12 @@ void ControlMenu() {
 			break;
 		}
 	}
+}
+
+void PlayBackgroundMusic() {
+	mciSendString(L"play \"Sounds//background-music.mp3\" repeat", NULL, 0, 0); //Play background music
+}
+
+void StopPlayingBackgroundMusic() {
+	mciSendString(L"close \"Sounds//background-music.mp3\"", NULL, 0, 0); 
 }

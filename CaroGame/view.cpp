@@ -65,6 +65,7 @@ void ShowCur(bool CursorVisibility) {
 
 //Draw the Caro board
 void DrawBoard(int pSize) {
+	ShowCur(0);
 	int Max_i = pSize * 2;
 	int Max_j = pSize * 4;
 	//Effect
@@ -116,6 +117,7 @@ void DrawBoard(int pSize) {
 		}
 	}
 	GotoXY(FIRST_CELL_X, FIRST_CELL_Y); //Move pointer to the first cell
+	ShowCur(1);
 }
 
 //Loading effect when run the game
@@ -126,7 +128,7 @@ void LoadingEffect() {
 	GotoXY(45, 20);
 	for (int i = 0; i <= 80; i++) {
 		cout << char(219);
-		Sleep(15);
+		Sleep(10);
 	}
 	//Clear screen
 	GotoXY(45, 19);
@@ -146,13 +148,40 @@ void MainMenu() {
 	wstring l4 = L"█••██╔════╝██╔══██╗██╔══██╗██╔═══██╗••••██╔════╝██║••██║██╔════╝██╔════╝██╔════╝••█	\n";
 	wstring l5 = L"█••██║•••••███████║██████╔╝██║•••██║••••██║•••••███████║█████╗••███████╗███████╗••█	\n";
 	wstring l6 = L"█••██║•••••██╔══██║██╔══██╗██║•••██║••••██║•••••██╔══██║██╔══╝••╚════██║╚════██║••█	\n";
-	wstring l7 = L"█••╚██████╗██║••██║██║••██║╚██████╔╝••••╚██████╗██║••██║███████╗███████║███████║••█ \n";
-	wstring l8 = L"█•••╚═════╝╚═╝••╚═╝╚═╝••╚═╝•╚═════╝••••••╚═════╝╚═╝••╚═╝╚══════╝╚══════╝╚══════╝••█	\n";
+	wstring l7 = L"█••╚██████╗██║••██║██║••██║╚██████╔╝••••╚██████╗██║••██║███████╗███████║███████║••█  \n";
+	wstring l8 = L"█•••╚═════╝╚═╝••╚═╝╚═╝••╚═╝•╚═════╝••••••╚═════╝╚═╝••╚═╝╚══════╝╚══════╝╚══════╝••█  \n";
 	wstring l9 = L"▀▀█•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••█▀▀	\n";
 	wstring l0 = L"  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀	\n";
 	//Print & Effect
-	int x = 44, y = 7;
-	for (int i = 0; i < l1.size(); i++) {
+	int x = 44, y = 7, x_last = 45 + l1.size();
+	//Print quicker
+	/*for (int i = 0; i < l1.size() - 1; i += 2) {
+		x += 2;
+		GotoXY(x, y);
+		wcout << l1[i] << l1[i + 1];
+		GotoXY(x, y + 1);
+		wcout << l2[i] << l2[i + 1];
+		GotoXY(x, y + 2);
+		wcout << l3[i] << l3[i + 1];
+		GotoXY(x, y + 3);
+		wcout << l4[i] << l4[i + 1];
+		GotoXY(x, y + 4);
+		wcout << l5[i] << l5[i + 1];
+		GotoXY(x, y + 5);
+		wcout << l6[i] << l6[i + 1];
+		GotoXY(x, y + 6);
+		wcout << l7[i] << l7[i + 1];
+		GotoXY(x, y + 7);
+		wcout << l8[i] << l8[i + 1];
+		GotoXY(x, y + 8);
+		wcout << l9[i] << l9[i + 1];
+		GotoXY(x, y + 9);
+		wcout << l0[i] << l0[i + 1];
+		Sleep(2);
+	}*/
+
+	//Print slower
+	for (int i = 0; i <= l1.size() - 1 - i; i++) {
 		GotoXY(++x, y);
 		wcout << l1[i];
 		GotoXY(x, y + 1);
@@ -173,18 +202,41 @@ void MainMenu() {
 		wcout << l9[i];
 		GotoXY(x, y + 9);
 		wcout << l0[i];
-		Sleep(4);
+
+		GotoXY(--x_last, y);
+		wcout << l1[l1.size() - 1 - i];
+		GotoXY(x_last, y + 1);
+		wcout << l2[l1.size() - 1 - i];
+		GotoXY(x_last, y + 2);
+		wcout << l3[l1.size() - 1 - i];
+		GotoXY(x_last, y + 3);
+		wcout << l4[l1.size() - 1 - i];
+		GotoXY(x_last, y + 4);
+		wcout << l5[l1.size() - 1 - i];
+		GotoXY(x_last, y + 5);
+		wcout << l6[l1.size() - 1 - i];
+		GotoXY(x_last, y + 6);
+		wcout << l7[l1.size() - 1 - i];
+		GotoXY(x_last, y + 7);
+		wcout << l8[l1.size() - 1 - i];
+		GotoXY(x_last, y + 8);
+		wcout << l9[l1.size() - 1 - i];
+		GotoXY(x_last, y + 9);
+		wcout << l0[l1.size() - 1 - i];
+
+		Sleep(3);
 	}
 	int CurrentMode = _setmode(_fileno(stdout), OldMode);
 
 	//Draw bars
-	for (int i = 0; i < BMax_i; i++) {
+
+	for (int i = 0; i < BMax_i; i += 3) {
 
 		GotoXY(BLeft + i, BTop);
-		cout << Lower_Vertical;
+		cout << Lower_Vertical << Lower_Vertical << Lower_Vertical;
 
 		GotoXY(BMax_i + BLeft - i, BMax_j);
-		cout << Upper_Vertical;
+		cout << Upper_Vertical << Upper_Vertical << Upper_Vertical;
 		Sleep(5);
 	}
 
@@ -360,7 +412,30 @@ void Help()
 {
 	system("cls");
 	ShowCur(false);
-	for (int i = 0; i <= HMax_i; i++) {
+
+	//Print Quicker
+	for (int i = 0; i <= HMax_i; i += 2) {
+		GotoXY(HLeft + i, HTop);
+		cout << Lower_Vertical << Lower_Vertical;
+		GotoXY(HMax_i + HLeft - i, HMax_j);
+		cout << Upper_Vertical << Upper_Vertical;
+		Sleep(5);
+	}
+
+	for (int i = 1; i < HMax_j - HTop; i += 2) {
+		GotoXY(HMax_i + HLeft + 1, HTop + i);
+		cout << Horizontal_Line;
+		GotoXY(HMax_i + HLeft + 1, HTop + i + 1);
+		cout << Horizontal_Line;
+		GotoXY(HLeft, HMax_j - i);
+		cout << Horizontal_Line;
+		GotoXY(HLeft, HMax_j - i - 1);
+		cout << Horizontal_Line;
+		Sleep(5);
+	}
+
+	//Print Slower
+	/*for (int i = 0; i <= HMax_i; i++) {
 		GotoXY(HLeft + i, HTop);
 		cout << Lower_Vertical;
 
@@ -376,7 +451,7 @@ void Help()
 		GotoXY(HLeft, HMax_j - i);
 		cout << Horizontal_Line;
 		Sleep(5);
-	}
+	}*/
 
 	GotoXY(68, HMax_j - 2);
 	cout << "Press Enter to return to Main Menu";

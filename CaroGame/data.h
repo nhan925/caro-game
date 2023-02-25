@@ -1,4 +1,5 @@
 #pragma once
+#pragma comment(lib, "winmm.lib")
 
 //Library
 #include <iostream>
@@ -64,7 +65,7 @@ using std::wstring;
 // Menu's Box Data
 #define BMax_i 85
 #define BMax_j 35
-#define BLeft 44
+#define BLeft 43
 #define BTop 19
 
 // Help Data

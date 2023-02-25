@@ -10,3 +10,5 @@ void HandleKeyForHelp(int X, int Y, KEY_EVENT_RECORD key);
 void HandleEvent(int x, int y, void(*func)(int, int, KEY_EVENT_RECORD));
 void Exit();
 void ControlMenu();
+void PlayBackgroundMusic();
+void StopPlayingBackgroundMusic();
