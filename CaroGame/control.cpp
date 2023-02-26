@@ -15,12 +15,14 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 		switch (key.wVirtualKeyCode)
 		{
 		case VK_RETURN: //Enter
-			PlaySound(TEXT("Sounds//put-x-o.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//put-x-o.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			break;
 		case VK_ESCAPE: //Esc
 			break;
 		case VK_LEFT: case 0x41: //Left arrow
-			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_X == FIRST_CELL_X) {
 				_X += (BOARD_SIZE - 1) * x;
 				GotoXY(_X, _Y);
@@ -31,7 +33,8 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 			}
 			break;
 		case VK_RIGHT: case 0x44: //Right arrow
-			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_X == FIRST_CELL_X + (BOARD_SIZE - 1) * x) {
 				_X = FIRST_CELL_X;
 				GotoXY(_X, _Y);
@@ -42,7 +45,8 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 			}
 			break;
 		case VK_DOWN: case 0x53: //Down arrow
-			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_Y == FIRST_CELL_Y + (BOARD_SIZE - 1) * y) {
 				_Y = FIRST_CELL_Y;
 				GotoXY(_X, _Y);
@@ -53,7 +57,8 @@ void HandleKeyForBoard(int x, int y, KEY_EVENT_RECORD key) {
 			}
 			break;
 		case VK_UP: case 0x57: //Up arrow
-			PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//move-in-board.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			if (_Y == FIRST_CELL_Y) {
 				_Y += (BOARD_SIZE - 1) * y;
 				GotoXY(_X, _Y);
@@ -76,12 +81,14 @@ void HandleKeyForMainMenu(int X, int Y, KEY_EVENT_RECORD key) {
 		switch (key.wVirtualKeyCode)
 		{
 		case VK_RETURN: {//Enter
-			PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			_KEYPRESSED = 1;
 			break; 
 		}
 		case VK_DOWN: case 0x53: {//Down arrow
-			PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			GotoXY(DEFAULT_X, DEFAULT_Y);
 			printf(" ");
 			GotoXY(DEFAULT_X + 13, DEFAULT_Y);
@@ -101,7 +108,8 @@ void HandleKeyForMainMenu(int X, int Y, KEY_EVENT_RECORD key) {
 			break; 
 		}
 		case VK_UP: case 0x57: {//Up arrow
-			PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
 			GotoXY(DEFAULT_X, DEFAULT_Y);
 			printf(" ");
 			GotoXY(DEFAULT_X + 13, DEFAULT_Y);
@@ -129,13 +137,110 @@ void HandleKeyForMainMenu(int X, int Y, KEY_EVENT_RECORD key) {
 //Handle key for the Help Menu
 void HandleKeyForHelp(int X, int Y, KEY_EVENT_RECORD key) {
 	if (key.bKeyDown && key.wVirtualKeyCode == VK_RETURN) {
-		PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		if (sound_mode)
+			PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
 		_MENU = 1;
 		_CURRENT_MENU = 0;
 		system("cls");
 		MainMenu();
 		DEFAULT_X = 80;
 		DEFAULT_Y = 22;
+	}
+}
+
+// Handle key for Setting Menu
+void HandleKeyForSetting(int x, int y, KEY_EVENT_RECORD key) {
+	//y is useless
+	if (key.bKeyDown) //Key pressed
+	{
+		switch (key.wVirtualKeyCode)
+		{
+		case VK_RETURN: //Enter
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			_SETTING = 0;
+			_Y_Set = STop + 5;
+			system("cls");
+			_CURRENT_MENU = 0;
+			_MENU = 1;
+			system("cls");
+			MainMenu();
+			DEFAULT_X = 80;
+			DEFAULT_Y = 22;
+			break;
+		case VK_LEFT: case 0x41: //Left arrow
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (_SETTING == 0 && music_mode == 0)
+			{
+				music_mode = 1;
+				Music_Mode(music_mode);
+				Music_Control();
+			}
+			if (_SETTING == 1 && sound_mode == 0)
+			{
+				sound_mode = 1;
+				Sound_Mode(sound_mode);
+			}
+			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			break;
+		case VK_RIGHT: case 0x44: //Right arrow
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			if (_SETTING == 0 && music_mode == 1)
+			{
+				music_mode = 0;
+				Music_Mode(music_mode);
+				Music_Control();
+			}
+			if (_SETTING == 1 && sound_mode == 1)
+			{
+				sound_mode = 0;
+				Sound_Mode(sound_mode);
+			}
+			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			break;
+		case VK_DOWN: case 0x53: //Down arrow
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			GotoXY(x - 4, _Y_Set);
+			printf(" ");
+			GotoXY(x + 6, _Y_Set);
+			printf(" ");
+			if (_SETTING == 1)
+			{
+				_SETTING = 0;
+				_Y_Set = STop + 5;
+			}
+			else
+			{
+				_SETTING += 1;
+				_Y_Set += 2;
+			}
+			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			break;
+		case VK_UP: case 0x57: //Up arrow
+			if (sound_mode)
+				PlaySound(TEXT("Sounds//switch-selection.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			GotoXY(x - 4, _Y_Set);
+			printf(" ");
+			GotoXY(x + 6, _Y_Set);
+			printf(" ");
+			if (_SETTING == 0)
+			{
+				_SETTING = 1;
+				_Y_Set = STop + 7;
+			}
+			else
+			{
+				_SETTING -= 1;
+				_Y_Set -= 2;
+			}
+			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			break;
+		default:
+			break;
+		}
 	}
 }
 
@@ -174,6 +279,9 @@ void ControlMenu() {
 				break;
 			case 3:
 				_KEYPRESSED = 0;
+				_CURRENT_MENU = 3;
+				system("cls");
+				Setting(music_mode, sound_mode);
 				break;
 			case 4:
 				_CURRENT_MENU = 4;
@@ -201,6 +309,7 @@ void ControlMenu() {
 		case 2:
 			break;
 		case 3:
+			HandleEvent(90, STop + 5, HandleKeyForSetting);
 			break;
 		case 4:
 			HandleEvent(80, 22, HandleKeyForHelp);
@@ -211,10 +320,10 @@ void ControlMenu() {
 	}
 }
 
-void PlayBackgroundMusic() {
-	mciSendString(L"play \"Sounds//background-music.mp3\" repeat", NULL, 0, 0); //Play background music
-}
-
-void StopPlayingBackgroundMusic() {
-	mciSendString(L"close \"Sounds//background-music.mp3\"", NULL, 0, 0); 
+void Music_Control()
+{
+	if (music_mode)
+		mciSendString(L"play \"Sounds//background-music.mp3\" repeat", NULL, 0, 0);
+	else
+		mciSendString(L"close \"Sounds//background-music.mp3\"", NULL, 0, 0);
 }

@@ -9,17 +9,21 @@ int main() {
 	//while (1) {
 	//	HandleEvent(4, 2, HandleKeyForBoard);
 	//}
+	//LoadingEffect();
+	//
+	//
+	//PlaySound(TEXT("Sounds//silent.wav"), NULL, SND_FILENAME | SND_ASYNC);  //Fix sound delay
+	//
+	//PlayBackgroundMusic();
+	//
+	//MainMenu();
+	//ControlMenu();
+	////cin.get();
+	
 	LoadingEffect();
-	
-	
-	PlaySound(TEXT("Sounds//silent.wav"), NULL, SND_FILENAME | SND_ASYNC);  //Fix sound delay
-	
-	PlayBackgroundMusic();
-	
+	Music_Control();
 	MainMenu();
 	ControlMenu();
-	//cin.get();
-	
 
 	return 0;
 }

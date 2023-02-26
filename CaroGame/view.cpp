@@ -63,6 +63,17 @@ void ShowCur(bool CursorVisibility) {
 	SetConsoleCursorInfo(handle, &ConCurInf);
 }
 
+//Change color of Text since this function is called
+void TextColor(int color)
+{
+	static int __BACKGROUND = 7;
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
+	GetConsoleScreenBufferInfo(h, &csbiInfo);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
+	color + (__BACKGROUND << 4));
+}
+
 //Draw the Caro board
 void DrawBoard(int pSize) {
 	ShowCur(0);
@@ -154,33 +165,6 @@ void MainMenu() {
 	wstring l0 = L"  ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀	\n";
 	//Print & Effect
 	int x = 44, y = 7, x_last = 45 + l1.size();
-	//Print quicker
-	/*for (int i = 0; i < l1.size() - 1; i += 2) {
-		x += 2;
-		GotoXY(x, y);
-		wcout << l1[i] << l1[i + 1];
-		GotoXY(x, y + 1);
-		wcout << l2[i] << l2[i + 1];
-		GotoXY(x, y + 2);
-		wcout << l3[i] << l3[i + 1];
-		GotoXY(x, y + 3);
-		wcout << l4[i] << l4[i + 1];
-		GotoXY(x, y + 4);
-		wcout << l5[i] << l5[i + 1];
-		GotoXY(x, y + 5);
-		wcout << l6[i] << l6[i + 1];
-		GotoXY(x, y + 6);
-		wcout << l7[i] << l7[i + 1];
-		GotoXY(x, y + 7);
-		wcout << l8[i] << l8[i + 1];
-		GotoXY(x, y + 8);
-		wcout << l9[i] << l9[i + 1];
-		GotoXY(x, y + 9);
-		wcout << l0[i] << l0[i + 1];
-		Sleep(2);
-	}*/
-
-	//Print slower
 	for (int i = 0; i <= l1.size() - 1 - i; i++) {
 		GotoXY(++x, y);
 		wcout << l1[i];
@@ -413,7 +397,6 @@ void Help()
 	system("cls");
 	ShowCur(false);
 
-	//Print Quicker
 	for (int i = 0; i <= HMax_i; i += 2) {
 		GotoXY(HLeft + i, HTop);
 		cout << Lower_Vertical << Lower_Vertical;
@@ -433,26 +416,6 @@ void Help()
 		cout << Horizontal_Line;
 		Sleep(5);
 	}
-
-	//Print Slower
-	/*for (int i = 0; i <= HMax_i; i++) {
-		GotoXY(HLeft + i, HTop);
-		cout << Lower_Vertical;
-
-		GotoXY(HMax_i + HLeft - i, HMax_j);
-		cout << Upper_Vertical;
-		Sleep(5);
-	}
-
-	for (int i = 1; i < HMax_j - HTop; i++) {
-		GotoXY(HMax_i + HLeft, HTop + i);
-		cout << Horizontal_Line;
-
-		GotoXY(HLeft, HMax_j - i);
-		cout << Horizontal_Line;
-		Sleep(5);
-	}*/
-
 	GotoXY(68, HMax_j - 2);
 	cout << "Press Enter to return to Main Menu";
 	DrawArrow();
@@ -460,6 +423,7 @@ void Help()
 	DrawEnter();
 }	
 
+//Draw BYE when exit
 void Bye() {
 	ShowCur(0);
 	int x = 65, y = 17;
@@ -483,4 +447,115 @@ void Bye() {
 	GotoXY(x, ++y);
 	wcout << L" \\▓▓▓▓▓▓▓     \\▓▓    \\▓▓▓▓▓▓▓▓     \\▓▓\\▓▓\\▓▓ 	\n";
 	int CurrentMode = _setmode(_fileno(stdout), OldMode);
+}
+
+//Draw arrow and blur arrow when change settings
+void DrawChangeSetting(int x, int y, int setting, int music_mode, int sound_mode)
+{
+	switch (setting)
+	{
+	case 0:
+		GotoXY(x - 5, y);
+		printf(" ");
+		TextColor(music_mode == 0 ? 0 : 8);
+		cout << SELECTED_RIGHT;
+
+		GotoXY(x + 5, y);
+		printf(" ");
+		TextColor(music_mode == 0 ? 8 : 0);
+		cout << SELECTED_LEFT;
+		TextColor(0);
+		break;
+	case 1:
+		GotoXY(x - 5, y);
+		printf(" ");
+		TextColor(sound_mode == 0 ? 0 : 8);
+		cout << SELECTED_RIGHT;
+
+		GotoXY(x + 5, y);
+		printf(" ");
+		TextColor(sound_mode == 0 ? 8 : 0);
+		cout << SELECTED_LEFT;
+		TextColor(0);
+		break;
+	default:
+		break;
+	}
+}
+
+//Draw Setting On/Off of background music
+void Music_Mode(int i)
+{
+	int x = 90, y = STop + 5;
+	GotoXY(x, y);
+	printf(" ");
+	GotoXY(x + 1, y);
+	printf(" ");
+	GotoXY(x + 2, y);
+	printf(" ");
+	GotoXY(x, y);
+	cout << mode[i];
+
+	GotoXY(x - 4, y);
+	TextColor(i == 0 ? 0 : 8);
+	cout << SELECTED_RIGHT;
+
+	GotoXY(x + 6, y);
+	TextColor(i == 0 ? 8 : 0);
+	cout << SELECTED_LEFT;
+	TextColor(0);
+}
+
+//Draw Setting On/Off of ingame music
+void Sound_Mode(int i)
+{
+	int x = 90, y = STop + 7;
+	GotoXY(x, y);
+	printf(" ");
+	GotoXY(x + 1, y);
+	printf(" ");
+	GotoXY(x + 2, y);
+	printf(" ");
+	GotoXY(x, y);
+	cout << mode[i];
+	TextColor(0);
+}
+
+//Draw setting menu
+void Setting(int music_mode, int sound_mode)
+{
+	ShowCur(0);
+	// Draw Box
+	for (int i = 0; i <= HMax_i; i += 2) {
+		GotoXY(SLeft + i, STop);
+		cout << Lower_Vertical << Lower_Vertical;
+		GotoXY(SMax_i + SLeft - i, SMax_j);
+		cout << Upper_Vertical << Upper_Vertical;
+		Sleep(5);
+	}
+
+	for (int i = 1; i < SMax_j - STop; i += 2) {
+		GotoXY(SMax_i + SLeft + 1, STop + i);
+		cout << Horizontal_Line;
+		GotoXY(SMax_i + SLeft + 1, STop + i + 1);
+		cout << Horizontal_Line;
+		GotoXY(SLeft, SMax_j - i);
+		cout << Horizontal_Line;
+		GotoXY(SLeft, SMax_j - i - 1);
+		cout << Horizontal_Line;
+		Sleep(5);
+	}
+
+	// Content - Music
+	GotoXY(75, STop + 5);
+	cout << "Music: ";
+	Music_Mode(music_mode);
+
+	GotoXY(75, STop + 7);
+	cout << "Sound: ";
+	Sound_Mode(sound_mode);
+
+	// Back
+	GotoXY(70, SMax_j - 2);
+	cout << "Press Enter to apply and return";
 }

@@ -8,6 +8,8 @@
 #include <string>
 #include <io.h>
 #include <fcntl.h>
+#include <conio.h>
+#include <stdio.h>
 
 //Namespace
 using std::cout;
@@ -73,11 +75,16 @@ using std::wstring;
 #define HTop 5
 #define HMax_i 82
 #define HMax_j 36
-#define OrginalSize 16
 #define Left_Arrow char(17)
 #define Right_Arrow char(16)
 #define Up_Arrow char(30)
 #define Down_Arrow char(31)
+
+//Setting Data
+#define SLeft 43
+#define STop 9
+#define SMax_i 82
+#define SMax_j 32
 
 struct _POINT { 
 	int x, y, c; 
@@ -97,3 +104,10 @@ static int _CURRENT_MENU = 0;
 //Main Menu
 static int DEFAULT_X = 80;
 static int  DEFAULT_Y = 22;
+
+// Setting
+static int music_mode = 1;
+static int sound_mode = 1;
+const string mode[] = { "Off", "On" };
+static int _SETTING = 0;
+static int _Y_Set = STop + 5;
