@@ -559,3 +559,82 @@ void Setting(int music_mode, int sound_mode)
 	GotoXY(70, SMax_j - 2);
 	cout << "Press Enter to apply and return";
 }
+
+//Draw info menu
+void Info()
+{
+	for (int i = 0; i <= HMax_i; i += 2) {
+		GotoXY(ILeft + i, ITop);
+		cout << Lower_Vertical << Lower_Vertical;
+		GotoXY(IMax_i + HLeft - i, IMax_j);
+		cout << Upper_Vertical << Upper_Vertical;
+		Sleep(5);
+	}
+
+	for (int i = 1; i < HMax_j - HTop; i += 2) {
+		GotoXY(IMax_i + ILeft + 1, ITop + i);
+		cout << Horizontal_Line;
+		GotoXY(IMax_i + ILeft + 1, ITop + i + 1);
+		cout << Horizontal_Line;
+		GotoXY(ILeft, IMax_j - i);
+		cout << Horizontal_Line;
+		GotoXY(ILeft, IMax_j - i - 1);
+		cout << Horizontal_Line;
+		Sleep(5);
+	}
+	int OldMode = _setmode(_fileno(stdout), _O_WTEXT);
+	GotoXY(62, 8);
+	wcout << L"ADVANCED PROGRAMMING TECHNIQUES AND PRACTICES";
+
+	GotoXY(75, 10);
+	wcout << L"PROJECT: CARO CHESS";
+
+	GotoXY(49, 12);
+	wcout << L"───────────────────────═══════ Instructor ═══════───────────────────────";
+	GotoXY(74, 14);
+	wcout << L"PhD. Trương Toàn Thịnh";
+
+	GotoXY(49, 16);
+	wcout << L"─────────────────────────═══════ Author ═══════─────────────────────────";
+
+	GotoXY(69, 18);
+	wcout << L"Nguyễn Đình Nhân";
+	GotoXY(93, 18);
+	wcout << L"22120246";
+
+	GotoXY(69, 20);
+	wcout << L"Nguyễn Lê Tấn Phát";
+	GotoXY(93, 20);
+	wcout << L"22120262";
+
+	GotoXY(69, 22);
+	wcout << L"Võ Hoàng Nguyên";
+	GotoXY(93, 22);
+	wcout << L"22120241";
+
+	GotoXY(69, 24);
+	wcout << L"Nguyễn Trọng Nhân";
+	GotoXY(93, 24);
+	wcout << L"22120248";
+
+	GotoXY(69, 26);
+	wcout << L"Nguyễn Minh Nguyên";
+	GotoXY(93, 26);
+	wcout << L"22120238";
+
+	GotoXY(70, 28);
+	wprintf(L" ▄ .▄ ▄▄· • ▌ ▄ ·. ▄• ▄▌.▄▄ ·		");
+	GotoXY(70, 29);
+	wprintf(L"██▪▐█▐█ ▌▪·██ ▐███▪█▪██▌▐█ ▀.	    ");
+	GotoXY(70, 30);
+	wprintf(L"██▀▀███ ▄▄▐█ ▌▐▌▐█·█▌▐█▌▄▀▀▀█▄	");
+	GotoXY(70, 31);
+	wprintf(L"██▌▐▀▐███▌██ ██▌▐█▌▐█▄█▌▐█▄▪▐█	");
+	GotoXY(70, 32);
+	wprintf(L"▀▀▀ ··▀▀▀ ▀▀  █▪▀▀▀ ▀▀▀  ▀▀▀▀		");
+
+	int CurrentMode = _setmode(_fileno(stdout), OldMode);
+
+	GotoXY(68, IMax_j - 2);
+	cout << "Press Enter to return to Main Menu";
+}

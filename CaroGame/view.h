@@ -21,3 +21,4 @@ void Music_Mode(int i);
 void Sound_Mode(int i);
 void Setting(int music_mode, int sound_mode);
 void TextColor(int color);
+void Info();

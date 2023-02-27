@@ -244,6 +244,20 @@ void HandleKeyForSetting(int x, int y, KEY_EVENT_RECORD key) {
 	}
 }
 
+// Handle key for The Info Menu
+void HandleKeyForInfo(int X, int Y, KEY_EVENT_RECORD key) {
+	if (key.bKeyDown && key.wVirtualKeyCode == VK_RETURN) {
+		if (sound_mode)
+			PlaySound(TEXT("Sounds//select.wav"), NULL, SND_FILENAME | SND_ASYNC);
+		_MENU = 1;
+		_CURRENT_MENU = 0;
+		system("cls");
+		MainMenu();
+		DEFAULT_X = 80;
+		DEFAULT_Y = 22;
+	}
+}
+
 //Handle event
 void HandleEvent(int x, int y, void(*func)(int, int, KEY_EVENT_RECORD)) {
 	DWORD DWNumberOfEvents = 0;
@@ -266,7 +280,14 @@ void Exit() {
 	SendMessage(hwnd, WM_CLOSE, 0, 0);
 }
 
-//Control Menu
+//Control Menu:
+//0: Main Menu
+//1: New Game
+//2: Continue
+//3: Settings
+//4: Help
+//5: Info
+//6: Exit
 void ControlMenu() {
 	while (1) {
 		if (_KEYPRESSED) {
@@ -291,6 +312,9 @@ void ControlMenu() {
 				break;
 			case 5:
 				_KEYPRESSED = 0;
+				_CURRENT_MENU = 5;
+				system("cls");
+				Info();
 				break;
 			case 6:
 				system("cls");
@@ -315,6 +339,7 @@ void ControlMenu() {
 			HandleEvent(80, 22, HandleKeyForHelp);
 			break;
 		case 5:
+			HandleEvent(80, 22, HandleKeyForInfo);
 			break;
 		}
 	}

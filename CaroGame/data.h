@@ -86,6 +86,12 @@ using std::wstring;
 #define SMax_i 82
 #define SMax_j 32
 
+// Info data
+#define ILeft 43
+#define ITop 5
+#define IMax_i 82
+#define IMax_j 36
+
 struct _POINT { 
 	int x, y, c; 
 };
