@@ -350,5 +350,8 @@ void Music_Control()
 	if (music_mode)
 		mciSendString(L"play \"Sounds//background-music.mp3\" repeat", NULL, 0, 0);
 	else
-		mciSendString(L"close \"Sounds//background-music.mp3\"", NULL, 0, 0);
+		mciSendString(L"pause \"Sounds//background-music.mp3\"", NULL, 0, 0);
+
+	//If use "close", when turn off music, it will slow the game	
+	//mciSendString(L"close \"Sounds//background-music.mp3\"", NULL, 0, 0);   
 }
