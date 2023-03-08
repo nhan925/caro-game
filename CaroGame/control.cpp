@@ -182,7 +182,7 @@ void HandleKeyForSetting(int x, int y, KEY_EVENT_RECORD key) {
 				sound_mode = 1;
 				Sound_Mode(sound_mode);
 			}
-			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			DrawChangeSetting(x, _Y_Set);
 			break;
 		case VK_RIGHT: case 0x44: //Right arrow
 			if (sound_mode)
@@ -198,7 +198,7 @@ void HandleKeyForSetting(int x, int y, KEY_EVENT_RECORD key) {
 				sound_mode = 0;
 				Sound_Mode(sound_mode);
 			}
-			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			DrawChangeSetting(x, _Y_Set);
 			break;
 		case VK_DOWN: case 0x53: //Down arrow
 			if (sound_mode)
@@ -217,7 +217,7 @@ void HandleKeyForSetting(int x, int y, KEY_EVENT_RECORD key) {
 				_SETTING += 1;
 				_Y_Set += 2;
 			}
-			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			DrawChangeSetting(x, _Y_Set);
 			break;
 		case VK_UP: case 0x57: //Up arrow
 			if (sound_mode)
@@ -236,7 +236,7 @@ void HandleKeyForSetting(int x, int y, KEY_EVENT_RECORD key) {
 				_SETTING -= 1;
 				_Y_Set -= 2;
 			}
-			DrawChangeSetting(x, _Y_Set, _SETTING, music_mode, sound_mode);
+			DrawChangeSetting(x, _Y_Set);
 			break;
 		default:
 			break;
@@ -302,7 +302,7 @@ void ControlMenu() {
 				_KEYPRESSED = 0;
 				_CURRENT_MENU = 3;
 				system("cls");
-				Setting(music_mode, sound_mode);
+				Setting();
 				break;
 			case 4:
 				_CURRENT_MENU = 4;

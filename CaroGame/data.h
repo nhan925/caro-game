@@ -1,3 +1,6 @@
+#ifndef DATA_H
+#define DATA_H
+
 #pragma once
 #pragma comment(lib, "winmm.lib")
 
@@ -97,23 +100,25 @@ struct _POINT {
 };
 
 //Global Variables
-static _POINT _A[BOARD_SIZE][BOARD_SIZE];
-static bool _TURN;
-static int _COMMAND;
-static int _X = FIRST_CELL_X, _Y = FIRST_CELL_Y;
+extern _POINT _A[BOARD_SIZE][BOARD_SIZE];
+extern bool _TURN;
+extern int _COMMAND;
+extern int _X, _Y;
 
 //Menu Control
-static bool _KEYPRESSED = 0;
-static int _MENU = 1;
-static int _CURRENT_MENU = 0;
+extern bool _KEYPRESSED;
+extern int _MENU;
+extern int _CURRENT_MENU;
 
 //Main Menu
-static int DEFAULT_X = 80;
-static int  DEFAULT_Y = 22;
+extern int DEFAULT_X;
+extern int  DEFAULT_Y;
 
-// Setting
-static int music_mode = 1;
-static int sound_mode = 1;
+//Setting
+extern int music_mode;
+extern int sound_mode;
 const string mode[] = { "Off", "On" };
-static int _SETTING = 0;
-static int _Y_Set = STop + 5;
+extern int _SETTING;
+extern int _Y_Set;
+
+#endif

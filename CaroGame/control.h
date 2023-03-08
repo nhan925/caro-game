@@ -1,3 +1,6 @@
+#ifndef CONTROL_H
+#define CONTROL_H
+
 #pragma once
 #include "data.h"
 #include "view.h"
@@ -13,3 +16,5 @@ void HandleEvent(int x, int y, void(*func)(int, int, KEY_EVENT_RECORD));
 void Exit();
 void ControlMenu();
 void Music_Control();
+
+#endif

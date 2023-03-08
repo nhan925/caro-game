@@ -450,9 +450,9 @@ void Bye() {
 }
 
 //Draw arrow and blur arrow when change settings
-void DrawChangeSetting(int x, int y, int setting, int music_mode, int sound_mode)
+void DrawChangeSetting(int x, int y)
 {
-	switch (setting)
+	switch (_SETTING)
 	{
 	case 0:
 		GotoXY(x - 5, y);
@@ -522,7 +522,7 @@ void Sound_Mode(int i)
 }
 
 //Draw setting menu
-void Setting(int music_mode, int sound_mode)
+void Setting()
 {
 	ShowCur(0);
 	// Draw Box
