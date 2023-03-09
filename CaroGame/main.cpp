@@ -5,10 +5,10 @@
 
 int main() {
 	CreateConsoleWindow(WIDTH, HEIGHT);
-	//DrawBoard(BOARD_SIZE);
-	//while (1) {
-	//	HandleEvent(4, 2, HandleKeyForBoard);
-	//}
+	/*DrawBoard(BOARD_SIZE);
+	while (1) {
+		HandleEvent(4, 2, HandleKeyForBoard);
+	}*/
 	//LoadingEffect();
 	//
 	//
@@ -19,7 +19,8 @@ int main() {
 	//MainMenu();
 	//ControlMenu();
 	////cin.get();
-	
+
+
 	LoadingEffect();
 	Music_Control();
 	MainMenu();

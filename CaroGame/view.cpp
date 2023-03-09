@@ -74,6 +74,15 @@ void TextColor(int color)
 	color + (__BACKGROUND << 4));
 }
 
+//Print color text USAGE: PrintTextColor(L"example", <color>);
+void PrintTextColor(const wstring& s, const int& color) {
+	TextColor(color);
+	int OldMode = _setmode(_fileno(stdout), _O_WTEXT);
+	wcout << s;
+	int CurrentMode = _setmode(_fileno(stdout), OldMode);
+	TextColor(0);
+}
+
 //Draw the Caro board
 void DrawBoard(int pSize) {
 	ShowCur(0);

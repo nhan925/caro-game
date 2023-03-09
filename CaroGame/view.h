@@ -12,6 +12,7 @@ void GotoXY(int x, int y);
 void DrawBoard(int pSize);
 void SetFont(const wchar_t name[], int size);
 void ShowCur(bool CursorVisibility);
+void PrintTextColor(const wstring& s, const int& color);
 void MainMenu();
 void LoadingEffect();
 void Help();
